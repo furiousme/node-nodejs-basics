@@ -1,21 +1,19 @@
 import { createReadStream, createWriteStream } from "node:fs";
-import { unlink } from 'node:fs/promises';
-import zlib from 'node:zlib';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { unlink } from "node:fs/promises";
+import zlib from "node:zlib";
+import path from "path";
+import { getDirname } from "../helpers/index.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const __dirname = getDirname(import.meta.url);
 
 const compress = async () => {
-    const contentStream = createReadStream(__dirname + "/files/fileToCompress.txt");
-    const gzipStream = zlib.createGzip();
-    const writableStream = createWriteStream(__dirname + "/files/archive.gz");
+	const contentStream = createReadStream(path.join(__dirname, "files", "fileToCompress.txt"));
+	const writableStream = createWriteStream(path.join(__dirname, "files", "archive.gz"));
+	const gzipStream = zlib.createGzip();
 
-    contentStream.pipe(gzipStream).pipe(writableStream).on("close", () => {
-        unlink(__dirname + "/files/fileToCompress.txt");
-    }).on("error", (err) => console.log(err));
+	contentStream.pipe(gzipStream).pipe(writableStream).on("close", () => {
+		unlink(__dirname + "/files/fileToCompress.txt");
+	}).on("error", (err) => console.log(err));
 };
 
 await compress();

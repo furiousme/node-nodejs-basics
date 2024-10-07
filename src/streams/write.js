@@ -1,15 +1,14 @@
 import {createWriteStream} from "node:fs";
 import { stdin } from "node:process";
+import path from "path";
+import { getDirname } from "../helpers/index.js";
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = getDirname(import.meta.url);
 
 const write = async () => {
-    const writeStream = createWriteStream(__dirname + "/files/fileToWrite.txt");
-    stdin.pipe(writeStream);
+	const filePath = path.join(__dirname, "files", "fileToWrite.txt");
+	const writeStream = createWriteStream(filePath);
+	stdin.pipe(writeStream);
 };
 
 await write();

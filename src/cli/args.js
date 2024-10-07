@@ -1,21 +1,21 @@
 const parseArgs = () => {
-    const args = process.argv;
-    let n = 2;
-    let result = "";
+  const args = process.argv;
+  let n = 2;
+  let result = "";
 
-    while (n < args.length) {
-        if (args[n].startsWith("--")) {
-            const argName = args[n];
-            const value = args[n + 1];
+  while (n < args.length) {
+      if (args[n].startsWith("--")) {
+        const argName = args[n];
+        const value = args[n + 1];
 
-            result = `${result}${result ? "," : ""} ${args[n]} is ${value}`;
-            n += 2;
+        result = `${result}${result ? "," : ""} ${argName} is ${value}`;
+        n += 2;
 
-            continue;
-        }
+        continue;
     }
+  }
 
-    console.log(result);
+  console.log(result);
 };
 
 parseArgs();

@@ -1,18 +1,17 @@
 import fs from "node:fs";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { getDirname } from "../helpers/index.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = getDirname(import.meta.url);
 
 const copy = async () => {
-    const sourcePath = __dirname + "/files";
-    const destinationPath = __dirname + "/files_copy";
+	const sourcePath = path.join(__dirname, "files");
+	const destinationPath = path.join(__dirname, "files_copy"); 
 
-    fs.cp(sourcePath, destinationPath, { recursive: true, errorOnExist: true, force: false }, (err) => {
-        if (err) throw new Error("FS operation failed.");
-        console.log('Files were copied successfully.');
-    });
+	fs.cp(sourcePath, destinationPath, { recursive: true, errorOnExist: true, force: false }, (err) => {
+		if (err) throw new Error("FS operation failed.");
+		console.log("Files were copied successfully.");
+	});
 };
 
 await copy();

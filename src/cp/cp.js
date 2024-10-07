@@ -1,17 +1,17 @@
-import { fork } from 'child_process';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { fork } from "child_process";
+import path from "path";
+import { getDirname } from "../helpers/index.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = getDirname(import.meta.url);
 
 const spawnChildProcess = async (args) => {
-    const child = fork(__dirname + "/files/script.js", args);
+  const filePath = path.join(__dirname, 'files', 'script.js');
+  const child = fork(filePath, args);
 
-    child.on('error', (e) => {
-        console.log(e);
-        process.exit(1);
-    });
+  child.on("error", (e) => {
+    console.log(e);
+    process.exit(1);
+  });
 };
 
 // Put your arguments in function call to test this functionality

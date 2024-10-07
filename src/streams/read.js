@@ -1,15 +1,15 @@
-import { createReadStream } from 'node:fs';
+import { createReadStream } from "node:fs";
 import {stdout} from "node:process"
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { getDirname } from "../helpers/index.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = getDirname(import.meta.url);
 
 const read = async () => {
-    const contentStream = createReadStream(__dirname + "/files/fileToRead.txt");
-    contentStream.on('end', () => stdout.write('\n'))
-    contentStream.pipe(stdout);
+	const filePath = path.join(__dirname, "files", "fileToRead.txt");
+	const contentStream = createReadStream(filePath);
+	contentStream.on("end", () => stdout.write("\n"))
+	contentStream.pipe(stdout);
 };
 
 await read();
