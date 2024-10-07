@@ -8,7 +8,7 @@ const __dirname = getDirname(import.meta.url);
 const performCalculations = async () => {
 	const results = [];
 	const cpusNum = os.cpus().length;
-	const workerPath = path.join(__dirname, "files", "worker.js")
+	const workerPath = path.join(__dirname, "worker.js")
 	let counter = 0;
 
 	for (let i = 0; i < cpusNum; i++) {

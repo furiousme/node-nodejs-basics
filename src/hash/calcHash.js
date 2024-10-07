@@ -1,4 +1,5 @@
 import { createReadStream } from 'node:fs';
+import path from "node:path";
 import { createHash } from 'node:crypto';
 import { getDirname } from "../helpers/index.js";
 

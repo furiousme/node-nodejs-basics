@@ -3,11 +3,12 @@ import { release, version } from "node:os";
 import { createServer as createServerHttp } from "http";
 import { getDirname } from "../helpers/index.js";
 import { readFile } from "fs/promises";
+import { fileURLToPath } from "url";
 
 import "./files/c.js";
 
+const __filename = fileURLToPath(import.meta.url); 
 const __dirname = getDirname(import.meta.url);
-
 const random = Math.random();
 
 let unknownObject;
